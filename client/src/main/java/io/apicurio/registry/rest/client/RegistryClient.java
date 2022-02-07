@@ -210,4 +210,6 @@ public interface RegistryClient extends Closeable {
     List<ArtifactReference> getArtifactReferencesByContentId(long contentId);
 
     List<ArtifactReference> getArtifactReferencesByContentHash(String contentHash);
+
+    List<ArtifactReference> getArtifactReferencesByCoordinates(String groupId, String artifactId, String version);
 }
