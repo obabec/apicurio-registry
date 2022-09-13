@@ -35,17 +35,8 @@ public abstract class TestBase {
     protected final ResourceManager resourceManager = ResourceManager.getInstance();
     protected final OperatorManager operatorManager = OperatorManager.getInstance();
 
-    /* Function to set all necessary variables for test subclasses */
-
-    public abstract void setupTestClass();
-
     /* Constructor for all test subclasses */
 
-    public TestBase() {
-        setupTestClass();
-    }
-
-    @BeforeAll
     protected void beforeAllTests() throws InterruptedException {
         // Install Keycloak operator
         LoggerUtils.logDelimiter("#");
@@ -53,7 +44,6 @@ public abstract class TestBase {
         LoggerUtils.logDelimiter("#");
 
         KeycloakOLMOperatorType keycloakOLMOperator = new KeycloakOLMOperatorType();
-        operatorManager.installOperatorShared(keycloakOLMOperator);
         KeycloakUtils.deployKeycloak();
         Thread.sleep(Duration.ofMinutes(2).toMillis());
         LoggerUtils.logDelimiter("#");
@@ -61,23 +51,17 @@ public abstract class TestBase {
         LoggerUtils.logDelimiter("#");
 
         StrimziClusterOLMOperatorType strimziOperator = new StrimziClusterOLMOperatorType();
-        operatorManager.installOperatorShared(strimziOperator);
 
         LoggerUtils.logDelimiter("#");
         LOGGER.info("Deployment of shared resources is done!");
         LoggerUtils.logDelimiter("#");
     }
 
-    @AfterAll
-    protected void afterAllTests() throws InterruptedException {
+    protected void afterAllTests() {
         LoggerUtils.logDelimiter("#");
         LOGGER.info("Cleaning shared resources!");
         LoggerUtils.logDelimiter("#");
-        resourceManager.deleteKafka();
         KeycloakUtils.removeKeycloak(Environment.NAMESPACE);
-        Thread.sleep(Duration.ofMinutes(2).toMillis());
-        operatorManager.uninstallSharedOperators();
-        resourceManager.deleteSharedResources();
         LoggerUtils.logDelimiter("#");
         LOGGER.info("Cleaning done!");
         LoggerUtils.logDelimiter("#");
@@ -105,7 +89,7 @@ public abstract class TestBase {
             KafkaKind kafkaKind,
             boolean useKeycloak,
             boolean testAPI
-    ) throws InterruptedException {
+    ) {
         ApicurioRegistry registry = null;
 
         if (persistenceKind.equals(PersistenceKind.SQL)) {

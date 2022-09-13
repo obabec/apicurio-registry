@@ -100,7 +100,7 @@ public class CertificateUtils {
 
     private static void createSecret(
             ExtensionContext testContext, String namespace, String name, Map<String, String> secretData
-    ) throws InterruptedException {
+    ) {
         Secret secret = new SecretBuilder()
                 .withNewMetadata()
                     .withName(name)
@@ -117,7 +117,7 @@ public class CertificateUtils {
             String namespace,
             String caCertSecretName,
             String truststoreSecretName
-    ) throws InterruptedException {
+    ) {
         LOGGER.info("Preparing truststore...");
 
         String timestamp = String.valueOf(Instant.now().getEpochSecond());

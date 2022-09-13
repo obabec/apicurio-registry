@@ -57,7 +57,7 @@ public class KeycloakOLMOperatorType extends OLMOperator implements OperatorType
         if (Kubernetes.namespaceHasAnyOperatorGroup(getNamespace())) {
             LOGGER.info("Operator group already present in namespace {}.", getNamespace());
         } else {
-            setOperatorGroup(OperatorUtils.createOperatorGroup(getNamespace()));
+            //setOperatorGroup(OperatorUtils.createOperatorGroup(getNamespace()));
         }
 
         ResourceUtils.waitPackageManifestExists(catalogName, ssoPackage);
@@ -77,7 +77,7 @@ public class KeycloakOLMOperatorType extends OLMOperator implements OperatorType
                 channelName
         ));
 
-        ResourceManager.getInstance().createSharedResource(true, getSubscription());
+        //ResourceManager.getInstance().createSharedResource(true, getSubscription());
 
         /* Waiting for operator deployment readiness is implemented in OperatorManager. */
     }

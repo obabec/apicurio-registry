@@ -8,6 +8,7 @@ import io.fabric8.kubernetes.api.model.HasMetadata;
 import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.api.model.PodList;
 import io.fabric8.kubernetes.api.model.apps.Deployment;
+import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.openshift.api.model.operatorhub.lifecyclemanager.v1.PackageChannel;
 import io.fabric8.openshift.api.model.operatorhub.lifecyclemanager.v1.PackageManifest;
 import io.fabric8.openshift.api.model.operatorhub.v1.OperatorGroup;
@@ -198,24 +199,25 @@ public class OperatorUtils {
         return waitCatalogSourceReady(namespace, name, TimeoutBudget.ofDuration(Duration.ofMinutes(5)));
     }
 
-    public static OperatorGroup createOperatorGroup(String namespace) throws InterruptedException {
-        String name = namespace + "-operator-group";
+    public static OperatorGroup createOperatorGroup(KubernetesClient client) {
+       /* String name = namespace + "-operator-group";
 
         LOGGER.info("Creating operator group {} in namespace {} targeting namespace {}...", name, namespace, namespace);
 
         OperatorGroup operatorGroup = new OperatorGroupBuilder()
                 .withNewMetadata()
                     .withName(name)
-                    .withNamespace(namespace)
+                    .withNamespace(client.getNamespace())
                 .endMetadata()
                 .withNewSpec()
-                    .withTargetNamespaces(namespace)
+                    .withTargetNamespaces(client.getNamespace())
                 .endSpec()
                 .build();
 
         ResourceManager.getInstance().createSharedResource(true, operatorGroup);
 
-        return operatorGroup;
+        return operatorGroup;*/
+        return null;
     }
 
     public static void deleteOperatorGroup(OperatorGroup operatorGroup) {

@@ -63,10 +63,10 @@ public class KeycloakUtils {
         ResourceUtils.waitStatefulSetReady(namespace, "keycloak");
 
         // Create Keycloak HTTP Service and wait for its readiness
-        manager.createSharedResource( true, ServiceResourceType.getDefaultKeycloakHttp(namespace));
+        //manager.createSharedResource( true, ServiceResourceType.getDefaultKeycloakHttp(namespace));
 
         // Create Keycloak Route and wait for its readiness
-        manager.createSharedResource( true, RouteResourceType.getDefaultKeycloak(namespace));
+        //manager.createSharedResource( true, RouteResourceType.getDefaultKeycloak(namespace));
 
         // Log Keycloak URL
         LOGGER.info("Keycloak URL: {}", getDefaultKeycloakURL(namespace));
@@ -94,9 +94,8 @@ public class KeycloakUtils {
         );
     }
 
-    public static void removeKeycloak(String namespace) throws InterruptedException {
+    public static void removeKeycloak(String namespace) {
         removeKeycloakRealm(namespace);
-        Thread.sleep(Duration.ofMinutes(2).toMillis());
         LOGGER.info("Removing Keycloak...");
         Exec.executeAndCheck(
                 "oc",

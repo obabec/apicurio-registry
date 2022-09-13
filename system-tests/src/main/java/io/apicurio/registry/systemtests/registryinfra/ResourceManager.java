@@ -38,8 +38,6 @@ public class ResourceManager {
     private static final Logger LOGGER = LoggerUtils.getLogger();
     private static final ObjectMapper MAPPER = new ObjectMapper(new YAMLFactory());
     private static ResourceManager instance;
-    private static final Stack<Runnable> STORED_RESOURCES = new Stack<>();
-    private static final Stack<Runnable> SHARED_RESOURCES = new Stack<>();
 
     public static synchronized ResourceManager getInstance() {
         if (instance == null) {
@@ -83,7 +81,7 @@ public class ResourceManager {
 
     public final <T extends HasMetadata> void createResource(
             boolean waitReady, T resource
-    ) throws InterruptedException {
+    ) {
         String kind = resource.getKind();
         String name = resource.getMetadata().getName();
         String namespace = resource.getMetadata().getNamespace();
@@ -91,25 +89,13 @@ public class ResourceManager {
 
         LOGGER.info("Creating resource {}...", resourceInfo);
 
-        synchronized (this) {
-            if (namespace != null && Kubernetes.getNamespace(namespace) == null) {
-                createSharedResource(waitReady, NamespaceResourceType.getDefault(namespace));
-            }
-        }
+
 
         ResourceType<T> type = findResourceType(resource);
         type.createOrReplace(resource);
 
-        synchronized (this) {
-            if (!name.equals(Constants.KAFKA)) {
-                STORED_RESOURCES.push(() -> deleteResource(resource));
-            }
-        }
-
         LOGGER.info("Resource {} created.", resourceInfo);
-        if (!name.equals(Constants.KAFKA)) {
-            Thread.sleep(Duration.ofMinutes(1).toMillis());
-        }
+
         if (waitReady) {
             Assertions.assertTrue(
                     waitResourceCondition(resource, type::isReady),
@@ -117,47 +103,6 @@ public class ResourceManager {
             );
 
             LOGGER.info("Resource {} is ready.", resourceInfo);
-
-            T updated = type.get(resource.getMetadata().getNamespace(), resource.getMetadata().getName());
-            type.refreshResource(resource, updated);
-        } else {
-            LOGGER.info("Do not wait for resource {} to be ready.", resourceInfo);
-        }
-    }
-
-    public final <T extends HasMetadata> void createSharedResource(
-            boolean waitReady, T resource
-    ) throws InterruptedException {
-        String kind = resource.getKind();
-        String name = resource.getMetadata().getName();
-        String namespace = resource.getMetadata().getNamespace();
-        String resourceInfo = MessageFormat.format("{0} with name {1} in namespace {2}", kind, name, namespace);
-
-        LOGGER.info("Creating shared resource {}...", resourceInfo);
-
-        synchronized (this) {
-            if (namespace != null && Kubernetes.getNamespace(namespace) == null) {
-                createSharedResource(waitReady, NamespaceResourceType.getDefault(namespace));
-            }
-        }
-
-        ResourceType<T> type = findResourceType(resource);
-
-        type.createOrReplace(resource);
-
-        synchronized (this) {
-            SHARED_RESOURCES.push(() -> deleteResource(resource));
-        }
-
-        LOGGER.info("Shared resource {} created.", resourceInfo);
-
-        if (waitReady) {
-            Assertions.assertTrue(
-                    waitResourceCondition(resource, type::isReady),
-                    MessageFormat.format("Timed out waiting for shared resource {0} to be ready.", resourceInfo)
-            );
-
-            LOGGER.info("Shared resource {} is ready.", resourceInfo);
 
             T updated = type.get(resource.getMetadata().getNamespace(), resource.getMetadata().getName());
             type.refreshResource(resource, updated);
@@ -237,9 +182,6 @@ public class ResourceManager {
         LOGGER.info("Deleting resource {}...", resourceInfo);
 
         ResourceType<T> type = findResourceType(resource);
-        /*if (resourceInfo.contains("Subscription") && (resourceInfo.contains("sso") || resourceInfo.contains("keycloak"))) {
-            KeycloakUtils.removeKeycloak(resource.getMetadata().getNamespace());
-        }*/
 
         try {
             type.delete(resource);
@@ -253,36 +195,5 @@ public class ResourceManager {
         );
 
         LOGGER.info("Resource {} is deleted.", resourceInfo);
-    }
-
-    public void deleteKafka() {
-        Kafka kafka = KafkaResourceType.getOperation().inNamespace(Environment.NAMESPACE).withName(Constants.KAFKA).get();
-        if (kafka != null) {
-            deleteResource(kafka);
-        }
-    }
-    public void deleteSharedResources() {
-        LOGGER.info("----------------------------------------------");
-        LOGGER.info("Going to clear shared resources.");
-        LOGGER.info("----------------------------------------------");
-
-        while (!SHARED_RESOURCES.isEmpty()) {
-            SHARED_RESOURCES.pop().run();
-        }
-
-        LOGGER.info("----------------------------------------------");
-        LOGGER.info("");
-    }
-    public void deleteResources() {
-        LOGGER.info("----------------------------------------------");
-        LOGGER.info("Going to clear test resources.");
-        LOGGER.info("----------------------------------------------");
-
-        while (!STORED_RESOURCES.isEmpty()) {
-            STORED_RESOURCES.pop().run();
-        }
-
-        LOGGER.info("----------------------------------------------");
-        LOGGER.info("");
     }
 }

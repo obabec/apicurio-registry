@@ -150,7 +150,7 @@ public class ApicurioRegistryOLMOperatorType extends OLMOperator implements Oper
         }
 
         if (!getClusterWide() && !Kubernetes.namespaceHasAnyOperatorGroup(getNamespace())) {
-            setOperatorGroup(OperatorUtils.createOperatorGroup(getNamespace()));
+           // setOperatorGroup(OperatorUtils.createOperatorGroup(getNamespace()));
         }
 
         ResourceUtils.waitPackageManifestExists(catalogName, registryPackage);
@@ -170,7 +170,7 @@ public class ApicurioRegistryOLMOperatorType extends OLMOperator implements Oper
                 channelName
         ));
 
-        ResourceManager.getInstance().createResource(true, getSubscription());
+        //ResourceManager.getInstance().createResource(true, getSubscription());
 
         /* Waiting for operator deployment readiness is implemented in OperatorManager. */
     }

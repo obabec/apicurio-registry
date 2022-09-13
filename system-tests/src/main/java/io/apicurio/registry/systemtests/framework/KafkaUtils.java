@@ -43,7 +43,7 @@ public class KafkaUtils {
         return true;
     }
 
-    public static void createSecuredUser(ExtensionContext testContext, String username, Kafka kafka, KafkaKind kind) throws InterruptedException {
+    public static void createSecuredUser(ExtensionContext testContext, String username, Kafka kafka, KafkaKind kind) {
         String namespace = kafka.getMetadata().getNamespace();
         String kafkaName = kafka.getMetadata().getName();
         String kafkaCaSecretName = kafkaName + "-cluster-ca-cert";
@@ -61,7 +61,7 @@ public class KafkaUtils {
         );
     }
 
-    public static Kafka deployDefaultKafkaByKind(ExtensionContext testContext, KafkaKind kind) throws InterruptedException {
+    public static Kafka deployDefaultKafkaByKind(ExtensionContext testContext, KafkaKind kind) {
         Kafka kafka = KafkaResourceType.getDefaultByKind(kind);
 
         ResourceManager.getInstance().createResource(true, kafka);
@@ -75,15 +75,15 @@ public class KafkaUtils {
         return kafka;
     }
 
-    public static Kafka deployDefaultKafkaNoAuth(ExtensionContext testContext) throws InterruptedException {
+    public static Kafka deployDefaultKafkaNoAuth(ExtensionContext testContext) {
         return deployDefaultKafkaByKind(testContext, KafkaKind.NO_AUTH);
     }
 
-    public static Kafka deployDefaultKafkaTls(ExtensionContext testContext) throws InterruptedException {
+    public static Kafka deployDefaultKafkaTls(ExtensionContext testContext) {
         return deployDefaultKafkaByKind(testContext, KafkaKind.TLS);
     }
 
-    public static Kafka deployDefaultKafkaScram(ExtensionContext testContext) throws InterruptedException {
+    public static Kafka deployDefaultKafkaScram(ExtensionContext testContext) {
         return deployDefaultKafkaByKind(testContext, KafkaKind.SCRAM);
     }
 }

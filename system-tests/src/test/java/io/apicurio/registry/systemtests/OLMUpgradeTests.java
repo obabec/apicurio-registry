@@ -19,18 +19,14 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import java.text.MessageFormat;
 
 public class OLMUpgradeTests extends TestBase {
-    @Override
-    public void setupTestClass() {
-        LOGGER = LoggerUtils.getLogger();
-    }
 
     @AfterEach
     public void testAfterEach(ExtensionContext testContext) {
         LOGGER.info("AfterEach: " + testContext.getDisplayName());
 
-        resourceManager.deleteResources();
+       // resourceManager.deleteResources();
 
-        operatorManager.uninstallOperators();
+        //operatorManager.uninstallOperators();
     }
 
     public void runUpgradeTest(ExtensionContext testContext, boolean clusterWide) throws InterruptedException {

@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class KafkaResourceType implements ResourceType<Kafka> {
     private static final String KAFKA_VERSION = "3.1.0";
-    private static final int KAFKA_REPLICAS = 3;
+    private static final int KAFKA_REPLICAS = 1;
     private static final int ZOOKEEPER_REPLICAS = 1;
 
     @Override

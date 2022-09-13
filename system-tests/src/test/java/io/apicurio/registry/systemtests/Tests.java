@@ -35,9 +35,9 @@ public abstract class Tests extends TestBase {
     public void testAfterEach(ExtensionContext testContext) {
         LOGGER.info("AfterEach: " + testContext.getDisplayName());
 
-        resourceManager.deleteResources();
+        //resourceManager.deleteResources();
 
-        operatorManager.uninstallOperators();
+        //operatorManager.uninstallOperators();
     }
 
     /* TESTS - PostgreSQL */

@@ -50,7 +50,7 @@ public class ApicurioRegistryUtils {
     public static ApicurioRegistry deployDefaultApicurioRegistrySql(
             ExtensionContext testContext,
             boolean useKeycloak
-    ) throws InterruptedException {
+    )  {
         // Get Apicurio Registry
         ApicurioRegistry apicurioRegistrySql = ApicurioRegistryResourceType.getDefaultSql(
                 Constants.REGISTRY,
@@ -70,7 +70,7 @@ public class ApicurioRegistryUtils {
     public static ApicurioRegistry deployDefaultApicurioRegistryKafkasqlNoAuth(
             ExtensionContext testContext,
             boolean useKeycloak
-    ) throws InterruptedException {
+    ) {
         // Get Apicurio Registry
         ApicurioRegistry apicurioRegistryKafkasqlNoAuth = ApicurioRegistryResourceType.getDefaultKafkasql(
                 Constants.REGISTRY,
@@ -91,7 +91,7 @@ public class ApicurioRegistryUtils {
             ExtensionContext testContext,
             Kafka kafka,
             boolean useKeycloak
-    ) throws InterruptedException {
+    ) {
         // Get Apicurio Registry
         ApicurioRegistry apicurioRegistryKafkasqlTLS = ApicurioRegistryResourceType.getDefaultKafkasql(
                 Constants.REGISTRY,
@@ -108,13 +108,13 @@ public class ApicurioRegistryUtils {
                 getTruststoreSecretName(apicurioRegistryKafkasqlTLS)
         );
 
-        CertificateUtils.createKeystore(
+        /*CertificateUtils.createKeystore(
                 testContext,
                 kafka.getMetadata().getNamespace(),
                 Constants.KAFKA_USER,
                 getKeystoreSecretName(apicurioRegistryKafkasqlTLS),
                 kafka.getMetadata().getName() + "-kafka-bootstrap"
-        );
+        );*/
 
         if (useKeycloak) {
             ApicurioRegistryResourceType.updateWithDefaultKeycloak(apicurioRegistryKafkasqlTLS);
@@ -130,7 +130,7 @@ public class ApicurioRegistryUtils {
             ExtensionContext testContext,
             Kafka kafka,
             boolean useKeycloak
-    ) throws InterruptedException {
+    ) {
         // Get Apicurio Registry
         ApicurioRegistry apicurioRegistryKafkasqlSCRAM = ApicurioRegistryResourceType.getDefaultKafkasql(
                 Constants.REGISTRY,

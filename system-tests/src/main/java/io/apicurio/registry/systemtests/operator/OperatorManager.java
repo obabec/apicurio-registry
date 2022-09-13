@@ -17,9 +17,6 @@ import java.util.Stack;
 public class OperatorManager {
     private static final Logger LOGGER = LoggerUtils.getLogger();
     private static OperatorManager instance;
-    private static final Stack<Runnable> STORED_OPERATORS = new Stack<Runnable>();
-    private static final Stack<Runnable> SHARED_RESOURCES = new Stack<Runnable>();
-
     public static synchronized OperatorManager getInstance() {
         if (instance == null) {
             instance = new OperatorManager();
@@ -28,28 +25,8 @@ public class OperatorManager {
         return instance;
     }
 
-    private void createOperatorNamespace(String name) throws InterruptedException {
-        LOGGER.info("Creating new namespace {} for operator...", name);
-
-        Namespace namespace = NamespaceResourceType.getDefault(name);
-
-        ResourceManager.getInstance().createSharedResource(true, namespace);
-    }
-
     public void installOperator(OperatorType operatorType) throws InterruptedException {
         installOperator(operatorType, true);
-
-        synchronized (this) {
-            STORED_OPERATORS.push(() -> uninstallOperator(operatorType));
-        }
-    }
-
-    public void installOperatorShared(OperatorType operatorType) throws InterruptedException {
-        installOperator(operatorType, true);
-
-        synchronized (this) {
-            SHARED_RESOURCES.push(() -> uninstallOperator(operatorType));
-        }
     }
 
     public void installOperator(OperatorType operatorType, boolean waitReady) throws InterruptedException {
@@ -58,15 +35,9 @@ public class OperatorManager {
         String namespace = operatorType.getNamespaceName();
         String operatorInfo = MessageFormat.format("{0} with name {1} in namespace {2}", kind, name, namespace);
 
-        if (Kubernetes.getNamespace(namespace) == null) {
-            createOperatorNamespace(namespace);
-        } else {
-            LOGGER.info("Namespace {} for operator {} with name {} already exists.", namespace, kind, name);
-        }
-
         LOGGER.info("Installing operator {}...", operatorInfo);
 
-        operatorType.install();
+        //operatorType.install();
 
         LOGGER.info("Operator {} installed.", operatorInfo);
 
@@ -114,32 +85,6 @@ public class OperatorManager {
         }  else {
             LOGGER.info("Do not wait for operator {} to be uninstalled.", operatorInfo);
         }
-    }
-
-    public void uninstallOperators() {
-        LOGGER.info("----------------------------------------------");
-        LOGGER.info("Going to uninstall all operators.");
-        LOGGER.info("----------------------------------------------");
-
-        while (!STORED_OPERATORS.isEmpty()) {
-            STORED_OPERATORS.pop().run();
-        }
-
-        LOGGER.info("----------------------------------------------");
-        LOGGER.info("");
-    }
-
-    public void uninstallSharedOperators() {
-        LOGGER.info("----------------------------------------------");
-        LOGGER.info("Going to uninstall all operators.");
-        LOGGER.info("----------------------------------------------");
-
-        while (!SHARED_RESOURCES.isEmpty()) {
-            SHARED_RESOURCES.pop().run();
-        }
-
-        LOGGER.info("----------------------------------------------");
-        LOGGER.info("");
     }
 
     public boolean waitOperatorReady(OperatorType operatorType) {

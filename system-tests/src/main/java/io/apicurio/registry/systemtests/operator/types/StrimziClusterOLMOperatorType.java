@@ -10,6 +10,7 @@ import io.apicurio.registry.systemtests.registryinfra.resources.SubscriptionReso
 import io.fabric8.kubernetes.api.model.apps.Deployment;
 import io.fabric8.kubernetes.api.model.apps.DeploymentSpec;
 import io.fabric8.kubernetes.api.model.apps.DeploymentStatus;
+import io.fabric8.kubernetes.client.KubernetesClient;
 import org.slf4j.Logger;
 
 public class StrimziClusterOLMOperatorType extends OLMOperator implements OperatorType {
@@ -59,6 +60,7 @@ public class StrimziClusterOLMOperatorType extends OLMOperator implements Operat
     public void install() throws InterruptedException {
         /* Operator namespace is created in OperatorManager. */
 
+
         String catalogName = Environment.CATALOG;
         String catalogNamespace = Environment.CATALOG_NAMESPACE;
         String kafkaPackage = Environment.KAFKA_PACKAGE;
@@ -67,9 +69,8 @@ public class StrimziClusterOLMOperatorType extends OLMOperator implements Operat
             LOGGER.info("Installing cluster wide OLM operator {} in namespace {}...", getKind(), getNamespace());
         } else {
             LOGGER.info("Installing namespaced OLM operator {} in namespace {}...", getKind(), getNamespace());
-            if (!Kubernetes.namespaceHasAnyOperatorGroup(getNamespace())) {
-                setOperatorGroup(OperatorUtils.createOperatorGroup(getNamespace()));
-            }
+            //setOperatorGroup(OperatorUtils.createOperatorGroup(client));
+
         }
 
         ResourceUtils.waitPackageManifestExists(catalogName, kafkaPackage);
@@ -79,9 +80,9 @@ public class StrimziClusterOLMOperatorType extends OLMOperator implements Operat
 
         LOGGER.info("OLM operator CSV: {}", getClusterServiceVersion());
 
-        setSubscription(SubscriptionResourceType.getDefault(
+        /*setSubscription(SubscriptionResourceType.getDefault(
                 "kafka-subscription",
-                getNamespace(),
+                client.getNamespace(),
                 kafkaPackage,
                 catalogName,
                 catalogNamespace,
@@ -89,9 +90,8 @@ public class StrimziClusterOLMOperatorType extends OLMOperator implements Operat
                 channelName
         ));
 
-        ResourceManager.getInstance().createSharedResource( true, getSubscription());
-
-        /* Waiting for operator deployment readiness is implemented in OperatorManager. */
+        client.resource(this.getSubscription()).createOrReplace();
+        client.resource(this.getSubscription()).waitUntilReady();*/
     }
 
     @Override
