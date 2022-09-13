@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//@KubernetesTest
+@KubernetesTest
 @LoadKubernetesManifests({/*"/keycloak/keycloak.yaml",*/ "/strimzi/subscription.yaml" /*,"/kafka/scram.yaml", "/apicurio/bundle.yaml"*/})
 public class KafkasqlSCRAMIT extends TestBase {
     KubernetesClient client;
