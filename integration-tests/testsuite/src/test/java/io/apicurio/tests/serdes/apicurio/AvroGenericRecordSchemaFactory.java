@@ -19,7 +19,9 @@ package io.apicurio.tests.serdes.apicurio;
 import static org.junit.Assert.assertTrue;
 
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericData;
@@ -36,7 +38,11 @@ public class AvroGenericRecordSchemaFactory {
     private String namespace;
     private String recordName;
     private List<String> schemaKeys;
+
+    private Map<String, String> referenceKeys;
     private Schema schema;
+
+    private Schema.Parser parser = null;
 
     public AvroGenericRecordSchemaFactory(String namespace, String recordName, List<String> schemaKeys) {
         Objects.requireNonNull(namespace);
@@ -66,7 +72,25 @@ public class AvroGenericRecordSchemaFactory {
         generateSchema();
     }
 
+
+    public AvroGenericRecordSchemaFactory(String namespace, String recordName, List<String> schemaKeys, Map<String, String> referenceKeys) {
+        Objects.requireNonNull(namespace);
+        Objects.requireNonNull(recordName);
+        Objects.requireNonNull(schemaKeys);
+        Objects.requireNonNull(referenceKeys);
+        this.namespace = namespace;
+        this.recordName = recordName;
+        this.schemaKeys = schemaKeys;
+        this.referenceKeys = referenceKeys;
+        assertTrue(this.schemaKeys.size() > 0);
+        assertTrue(this.referenceKeys.size() > 0);
+        generateSchema();
+    }
+
     public Schema generateSchema() {
+        if (Objects.isNull(parser)) {
+            parser = new Schema.Parser();
+        }
         if (schema == null) {
             StringBuilder builder = new StringBuilder()
                     .append("{\"type\":\"record\"")
@@ -85,6 +109,16 @@ public class AvroGenericRecordSchemaFactory {
             builder.append(",")
                 .append("\"fields\":[");
             boolean first = true;
+            if (!Objects.isNull(referenceKeys)) {
+                for (String refKey : referenceKeys.keySet()) {
+                    if (!first) {
+                        builder.append(",");
+                    }
+                    builder.append("{\"name\":\"" + refKey + "\",\"type\":\"" + referenceKeys.get(refKey) +"\"}");
+                    first = false;
+                }
+            }
+
             for (String schemaKey : schemaKeys) {
                 if (!first) {
                     builder.append(",");
@@ -93,9 +127,16 @@ public class AvroGenericRecordSchemaFactory {
                 first = false;
             }
             builder.append("]}");
-            schema = new Schema.Parser().parse(builder.toString());
+            Schema enumSchema = Schema.createEnum("Exchange", "", "com.kubetrade.schema.common", Collections.singletonList("GEMINI"));
+            parser.parse(enumSchema.toString());
+            schema = parser.parse(builder.toString());
         }
         return schema;
+    }
+
+    public InputStream createEnumSchema() {
+        Schema enumSchema = Schema.createEnum("Exchange", "", "com.kubetrade.schema.common", Collections.singletonList("GEMINI"));
+        return IoUtil.toStream(enumSchema.toString());
     }
 
     public InputStream generateSchemaStream() {
@@ -110,6 +151,11 @@ public class AvroGenericRecordSchemaFactory {
         Objects.requireNonNull(schema);
         GenericRecord record = new GenericData.Record(schema);
         String message = "value-" + count;
+        if(!Objects.isNull(referenceKeys)) {
+            for (String refKey: referenceKeys.keySet()) {
+                record.put(refKey, "GEMINI");
+            }
+        }
         for (String schemaKey : schemaKeys) {
             record.put(schemaKey, message);
         }

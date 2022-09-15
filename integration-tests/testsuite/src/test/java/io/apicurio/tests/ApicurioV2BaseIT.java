@@ -223,4 +223,6 @@ public class ApicurioV2BaseIT extends ApicurioRegistryBaseIT {
         }
     }
 
+
+
 }

@@ -18,6 +18,7 @@ package io.apicurio.tests.serdes.apicurio;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -73,6 +74,32 @@ public class AvroSerdeIT extends ApicurioV2BaseIT {
     @AfterAll
     void teardownEnvironment() throws Exception {
         kafkaCluster.stopIfPossible();
+    }
+
+    @Test
+    @Tag(Constants.ACCEPTANCE)
+    void testBasicArtifactReference() throws Exception {
+        String topicName = TestUtils.generateTopic();
+        String artifactId = TestUtils.generateSubject();
+        String groupId = TestUtils.generateSubject();
+
+        kafkaCluster.createTopic(topicName, 1, 1);
+
+        AvroGenericRecordSchemaFactory avroSchemaMain = new AvroGenericRecordSchemaFactory("com.kubetrade.schema.trade", "TradeKey", List.of("key1"),
+                Collections.singletonMap("exchange", "com.kubetrade.schema.common.Exchange"));
+        createArtifact("com.kubetrade.schema.common", "Exchange", ArtifactType.AVRO, avroSchemaMain.createEnumSchema());
+        createArtifact("com.kubetrade.schema.trade", "TradeKey", ArtifactType.AVRO, avroSchemaMain.generateSchemaStream());
+        var x = registryClient.searchArtifacts(null, null, null, null, null, null, null, null, null);
+
+        new SimpleSerdesTesterBuilder<GenericRecord, GenericRecord>()
+                .withTopic(topicName)
+                .withSerializer(serializer)
+                .withDeserializer(deserializer)
+                .withStrategy(RecordIdStrategy.class)
+                .withDataGenerator(avroSchemaMain::generateRecord)
+                .withDataValidator(avroSchemaMain::validateRecord)
+                .build()
+                .test();
     }
 
     @Test
@@ -733,5 +760,4 @@ public class AvroSerdeIT extends ApicurioV2BaseIT {
         }
 
     }
-
 }
