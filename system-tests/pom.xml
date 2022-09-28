@@ -299,5 +299,12 @@
                 <skip.tests>false</skip.tests>
             </properties>
         </profile>
+        <profile>
+            <id>no-auth</id>
+            <properties>
+                <groups>!auth</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
     </profiles>
 </project>
