@@ -237,7 +237,9 @@ public final class Kubernetes {
                 .withLabels(Collections.singletonMap("app", apicurioRegistry.getMetadata().getName()))
                 .list()
                 .getItems()
-                .get(0);
+                .stream()
+                .findFirst()
+                .orElse(null);
     }
 
     public static void createRoute(String namespace, Route route) {
