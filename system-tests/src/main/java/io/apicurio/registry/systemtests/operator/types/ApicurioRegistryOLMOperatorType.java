@@ -232,14 +232,19 @@ public class ApicurioRegistryOLMOperatorType extends OLMOperator implements Oper
         // Create new catalog source from image
         createCatalogSource(catalogNamespace);
 
-        // Update subscription to use newly created catalog source
-        getSubscription().getSpec().setSource(catalogSource.getMetadata().getName());
-
-        // Update subscription to use channel from newly created catalog source
-        getSubscription().getSpec().setChannel("2.x");
+        // Get new subscription to use newly created catalog source
+        Subscription subscriptionForUpgrade = SubscriptionResourceType.getDefault(
+                getSubscription().getMetadata().getName(),
+                getSubscription().getMetadata().getNamespace(),
+                getSubscription().getSpec().getName(),
+                catalogSource.getMetadata().getName(),
+                getSubscription().getSpec().getSourceNamespace(),
+                getSubscription().getSpec().getStartingCSV(),
+                "2.x"
+        );
 
         // Replace subscription of operator
-        Kubernetes.createOrReplaceSubscription(subNamespace, getSubscription());
+        Kubernetes.createOrReplaceSubscription(subNamespace, subscriptionForUpgrade);
 
         // Wait for update of subscription (it points to CSV from new catalog source)
         Assertions.assertTrue(
