@@ -7,7 +7,6 @@ import io.apicurio.registry.systemtests.api.features.CreateReadUpdateDelete;
 import io.apicurio.registry.systemtests.framework.Constants;
 import io.apicurio.registry.systemtests.registryinfra.resources.KafkaKind;
 import io.apicurio.registry.systemtests.registryinfra.resources.PersistenceKind;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
