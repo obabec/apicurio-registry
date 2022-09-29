@@ -235,6 +235,9 @@ public class ApicurioRegistryOLMOperatorType extends OLMOperator implements Oper
         // Update subscription to use newly created catalog source
         getSubscription().getSpec().setSource(catalogSource.getMetadata().getName());
 
+        // Update subscription to use channel from newly created catalog source
+        getSubscription().getSpec().setChannel("2.x");
+
         // Replace subscription of operator
         Kubernetes.createOrReplaceSubscription(subNamespace, getSubscription());
 
