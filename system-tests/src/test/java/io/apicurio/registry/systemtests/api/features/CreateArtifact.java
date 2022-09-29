@@ -9,6 +9,8 @@ import io.apicurio.registry.systemtests.framework.ApicurioRegistryUtils;
 import io.apicurio.registry.systemtests.framework.KeycloakUtils;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.UUID;
+
 public class CreateArtifact {
     public static void testCreateArtifact(ApicurioRegistry apicurioRegistry) {
         testCreateArtifact(apicurioRegistry, null, null, false);
@@ -24,8 +26,8 @@ public class CreateArtifact {
         Assertions.assertTrue(ApicurioRegistryUtils.waitApicurioRegistryHostnameReady(apicurioRegistry));
 
         // Prepare necessary variables
-        String artifactGroupId = "registry-create-test-group";
-        String artifactId = "registry-create-test-id";
+        String artifactGroupId = "registry-" + UUID.randomUUID();
+        String artifactId = "registry-" + UUID.randomUUID();
         String artifactContent = ArtifactContent.DEFAULT_AVRO;
         String hostname = ApicurioRegistryUtils.getApicurioRegistryHostname(apicurioRegistry);
 
