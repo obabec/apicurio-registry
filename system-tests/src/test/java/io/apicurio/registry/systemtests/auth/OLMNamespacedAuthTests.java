@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Tag;
 
 @Tag("olm")
 @Tag("olm-namespace")
+@Tag("olm-namespace-auth")
 public class OLMNamespacedAuthTests extends OLMAuthTests {
     @Override
     public void setupTestClass() {

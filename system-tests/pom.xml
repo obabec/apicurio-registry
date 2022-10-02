@@ -313,5 +313,26 @@
                 <skip.tests>false</skip.tests>
             </properties>
         </profile>
+        <profile>
+            <id>bundle-auth</id>
+            <properties>
+                <groups>bundle-auth</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-clusterwide-auth</id>
+            <properties>
+                <groups>olm-clusterwide-auth</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-namespace-auth</id>
+            <properties>
+                <groups>olm-namespace-auth</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
     </profiles>
 </project>
