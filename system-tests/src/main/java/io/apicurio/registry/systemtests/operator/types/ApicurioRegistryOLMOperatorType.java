@@ -25,6 +25,11 @@ import java.time.Duration;
 public class ApicurioRegistryOLMOperatorType extends OLMOperator implements OperatorType {
     protected static final Logger LOGGER = LoggerUtils.getLogger();
     private CatalogSource catalogSource = null;
+    private String deploymentName = Constants.REGISTRY_OPERATOR_DEPLOYMENT;
+
+    public void setDeploymentName(String deploymentName) {
+        this.deploymentName = deploymentName;
+    }
 
     public ApicurioRegistryOLMOperatorType() {
         super(Environment.CATALOG_IMAGE, Environment.CLUSTER_WIDE_NAMESPACE, true);
@@ -124,7 +129,7 @@ public class ApicurioRegistryOLMOperatorType extends OLMOperator implements Oper
 
     @Override
     public String getDeploymentName() {
-        return Constants.REGISTRY_OPERATOR_DEPLOYMENT;
+        return deploymentName;
     }
 
     @Override

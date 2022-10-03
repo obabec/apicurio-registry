@@ -8,6 +8,7 @@ import io.apicurio.registry.systemtests.client.ArtifactContent;
 import io.apicurio.registry.systemtests.client.ArtifactList;
 import io.apicurio.registry.systemtests.client.ArtifactType;
 import io.apicurio.registry.systemtests.framework.ApicurioRegistryUtils;
+import io.apicurio.registry.systemtests.framework.Constants;
 import io.apicurio.registry.systemtests.framework.DatabaseUtils;
 import io.apicurio.registry.systemtests.framework.LoggerUtils;
 import io.apicurio.registry.systemtests.operator.types.ApicurioRegistryOLMOperatorType;
@@ -32,6 +33,8 @@ public class OLMUpgradeTests extends TestBase {
                 null,
                 clusterWide
         );
+        // Set old name of operator deployment
+        registryOLMOperator.setDeploymentName("apicurio-registry-operator");
         operatorManager.installOperator(registryOLMOperator);
 
         // Save current (pre-upgrade) ClusterServiceVersion of operator
@@ -75,6 +78,8 @@ public class OLMUpgradeTests extends TestBase {
                 artifactList.getCount()
         ));
 
+        // Set new name of operator deployment
+        registryOLMOperator.setDeploymentName(Constants.REGISTRY_OPERATOR_DEPLOYMENT);
         // Run upgrade of operator from catalog source image
         registryOLMOperator.upgrade();
 
