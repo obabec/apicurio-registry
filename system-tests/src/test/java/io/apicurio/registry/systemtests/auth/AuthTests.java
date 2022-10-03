@@ -196,7 +196,7 @@ public abstract class AuthTests extends TestBase {
     }
     /* -------------------------------------------------------------------------------------------------------------- */
     @ParameterizedTest
-    @CsvFileSource(resources = "/adminOverrideClaimData.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/adminOverrideClaimDataExtended.csv", numLinesToSkip = 1)
     public void testRegistrySqlKeycloakRoleBasedAuthorizationAdminOverrideClaim(
             String claim,
             String claimValue,
@@ -400,7 +400,7 @@ public abstract class AuthTests extends TestBase {
     /* -------------------------------------------------------------------------------------------------------------- */
     @ParameterizedTest
     @Disabled
-    @CsvFileSource(resources = "/adminOverrideClaimData.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/adminOverrideClaimDataExtended.csv", numLinesToSkip = 1)
     public void testRegistryKafkasqlNoAuthKeycloakRoleBasedAuthorizationAdminOverrideClaim(
             String claim,
             String claimValue,
@@ -419,7 +419,7 @@ public abstract class AuthTests extends TestBase {
 
     @ParameterizedTest
     @Disabled
-    @CsvFileSource(resources = "/adminOverrideClaimData.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/adminOverrideClaimDataExtended.csv", numLinesToSkip = 1)
     public void testRegistryKafkasqlTLSKeycloakRoleBasedAuthorizationAdminOverrideClaim(
             String claim,
             String claimValue,
@@ -438,7 +438,7 @@ public abstract class AuthTests extends TestBase {
 
     @ParameterizedTest
     @Disabled
-    @CsvFileSource(resources = "/adminOverrideClaimData.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/adminOverrideClaimDataExtended.csv", numLinesToSkip = 1)
     public void testRegistryKafkasqlSCRAMKeycloakRoleBasedAuthorizationAdminOverrideClaim(
             String claim,
             String claimValue,
