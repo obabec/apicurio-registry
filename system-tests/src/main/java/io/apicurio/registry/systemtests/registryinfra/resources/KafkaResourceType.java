@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class KafkaResourceType implements ResourceType<Kafka> {
     private static final String KAFKA_VERSION = "3.1.0";
-    private static final int KAFKA_REPLICAS = 3;
+    private static final int KAFKA_REPLICAS = 1;
     private static final int ZOOKEEPER_REPLICAS = 1;
 
     @Override
@@ -138,15 +138,15 @@ public class KafkaResourceType implements ResourceType<Kafka> {
 
     public static Map<String, Object> getDefaultConfig() {
         return new HashMap<>() {{
-            put("offsets.topic.replication.factor", 3);
-            put("transaction.state.log.replication.factor", 3);
-            put("transaction.state.log.min.isr", 2);
+            put("offsets.topic.replication.factor", KAFKA_REPLICAS);
+            put("transaction.state.log.replication.factor", KAFKA_REPLICAS);
+            put("transaction.state.log.min.isr", 1);
         }};
     }
 
     public static PersistentClaimStorage getDefaultStorage() {
         return new PersistentClaimStorageBuilder()
-                .withSize("100Gi")
+                .withSize("30Gi")
                 .withDeleteClaim(true)
                 .build();
     }
