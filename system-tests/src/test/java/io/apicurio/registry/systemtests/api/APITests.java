@@ -7,6 +7,7 @@ import io.apicurio.registry.systemtests.api.features.CreateReadUpdateDelete;
 import io.apicurio.registry.systemtests.framework.Constants;
 import io.apicurio.registry.systemtests.registryinfra.resources.KafkaKind;
 import io.apicurio.registry.systemtests.registryinfra.resources.PersistenceKind;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -55,6 +56,7 @@ public abstract class APITests extends TestBase {
     }
 
     @Test
+    @Tag("live-test")
     public void testRegistrySqlKeycloakCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.SQL, null, true);
     }
@@ -87,6 +89,7 @@ public abstract class APITests extends TestBase {
     }
 
     @Test
+    @Tag("live-test")
     public void testRegistryKafkasqlTLSKeycloakCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.KAFKA_SQL, KafkaKind.TLS, true);
     }

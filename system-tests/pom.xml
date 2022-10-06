@@ -334,5 +334,13 @@
                 <skip.tests>false</skip.tests>
             </properties>
         </profile>
+        <profile>
+            <id>live-test</id>
+            <properties>
+                <groups>live-test</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+    </profiles>
     </profiles>
 </project>
