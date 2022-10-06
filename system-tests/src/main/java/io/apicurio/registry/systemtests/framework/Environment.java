@@ -23,7 +23,7 @@ public final class Environment {
     public static final String FORCE_NAMESPACE = "FORCE_NAMESPACE";
 
     /** Default values of environment variables */
-    public static final String CATALOG_DEFAULT = "community-operators";
+    public static final String CATALOG_DEFAULT = "redhat-operators";
     public static final String SSO_CATALOG_DEFAULT = "community-operators";
     public static final String KAFKA_DEPLOYMENT_DEFAULT = "strimzi-cluster-operator"; // Default from catalog
     public static final String KAFKA_PACKAGE_DEFAULT = "strimzi-kafka-operator"; // Default from catalog
