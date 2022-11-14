@@ -3,6 +3,7 @@ package io.apicurio.registry.systemtests.deploy;
 import io.apicurio.registry.systemtests.TestBase;
 import io.apicurio.registry.systemtests.registryinfra.resources.KafkaKind;
 import io.apicurio.registry.systemtests.registryinfra.resources.PersistenceKind;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -11,11 +12,13 @@ public abstract class DeployTests extends TestBase {
     /* TESTS - PostgreSQL */
 
     @Test
+    @Tag("sql")
     public void testRegistrySqlNoIAM() throws InterruptedException {
         deployTestRegistry(PersistenceKind.SQL, null, false);
     }
 
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloak() throws InterruptedException {
         deployTestRegistry(PersistenceKind.SQL, null, true);
     }

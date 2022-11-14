@@ -7,6 +7,7 @@ import io.apicurio.registry.systemtests.api.features.CreateReadUpdateDelete;
 import io.apicurio.registry.systemtests.framework.Constants;
 import io.apicurio.registry.systemtests.registryinfra.resources.KafkaKind;
 import io.apicurio.registry.systemtests.registryinfra.resources.PersistenceKind;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -50,21 +51,25 @@ public abstract class APITests extends TestBase {
     /* TESTS - PostgreSQL */
 
     @Test
+    @Tag("sql")
     public void testRegistrySqlNoIAMCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.SQL, null, false);
     }
 
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloakCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.SQL, null, true);
     }
     /* -------------------------------------------------------------------------------------------------------------- */
     @Test
+    @Tag("sql")
     public void testRegistrySqlNoIAMCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.SQL, null, false);
     }
 
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloakCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.SQL, null, true);
     }
