@@ -83,7 +83,7 @@ public class DeploymentResourceType implements ResourceType<Deployment> {
     private static Container getDefaultPostgresqlContainer(String name) {
         return new ContainerBuilder()
                 .withEnv(getDefaultPostgresqlEnvVars())
-                .withImage("quay.io/centos7/postgresql-12-centos7:latest")
+                .withImage("quay.io/centos7/postgresql-13-centos7:latest")
                 .withImagePullPolicy("Always")
                 .withName(name)
                 .addNewPort()
