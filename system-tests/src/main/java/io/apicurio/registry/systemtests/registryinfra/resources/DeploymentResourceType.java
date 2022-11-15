@@ -84,7 +84,7 @@ public class DeploymentResourceType implements ResourceType<Deployment> {
     private static Container getDefaultPostgresqlContainer(String name) {
         return new ContainerBuilder()
                 .withEnv(getDefaultPostgresqlEnvVars())
-                .withImage("postgres:14")
+                .withImage("postgres:15")
                 .withImagePullPolicy("Always")
                 .withName(name)
                 .addNewPort()
