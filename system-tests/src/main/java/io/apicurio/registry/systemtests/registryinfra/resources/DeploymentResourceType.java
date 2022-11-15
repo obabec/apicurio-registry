@@ -72,10 +72,11 @@ public class DeploymentResourceType implements ResourceType<Deployment> {
     private static List<EnvVar> getDefaultPostgresqlEnvVars() {
         List<EnvVar> envVars = new ArrayList<>();
 
-        envVars.add(new EnvVar("POSTGRESQL_ADMIN_PASSWORD", "adminpassword", null));
-        envVars.add(new EnvVar("POSTGRESQL_DATABASE", "postgresdb", null));
-        envVars.add(new EnvVar("POSTGRESQL_USER", "postgresuser", null));
-        envVars.add(new EnvVar("POSTGRESQL_PASSWORD", "postgrespassword", null));
+        envVars.add(new EnvVar("POSTGRES_ADMIN_PASSWORD", "adminpassword", null));
+        envVars.add(new EnvVar("POSTGRES_DB", "postgresdb", null));
+        envVars.add(new EnvVar("POSTGRES_USER", "postgresuser", null));
+        envVars.add(new EnvVar("POSTGRES_PASSWORD", "postgrespassword", null));
+        envVars.add(new EnvVar("PGDATA", "/var/lib/pgsql/data/pgdata", null));
 
         return envVars;
     }
@@ -83,7 +84,7 @@ public class DeploymentResourceType implements ResourceType<Deployment> {
     private static Container getDefaultPostgresqlContainer(String name) {
         return new ContainerBuilder()
                 .withEnv(getDefaultPostgresqlEnvVars())
-                .withImage("quay.io/centos7/postgresql-13-centos7:latest")
+                .withImage("postgres:14")
                 .withImagePullPolicy("Always")
                 .withName(name)
                 .addNewPort()
