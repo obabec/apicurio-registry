@@ -84,7 +84,7 @@ public class DeploymentResourceType implements ResourceType<Deployment> {
     private static Container getDefaultPostgresqlContainer(String name) {
         return new ContainerBuilder()
                 .withEnv(getDefaultPostgresqlEnvVars())
-                .withImage("postgres:14")
+                .withImage("quay.io/rkubis/pg:14")
                 .withImagePullPolicy("Always")
                 .withName(name)
                 .addNewPort()
