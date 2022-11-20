@@ -7,6 +7,7 @@ import io.apicurio.registry.systemtests.api.features.CreateReadUpdateDelete;
 import io.apicurio.registry.systemtests.framework.Constants;
 import io.apicurio.registry.systemtests.registryinfra.resources.KafkaKind;
 import io.apicurio.registry.systemtests.registryinfra.resources.PersistenceKind;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -114,36 +115,42 @@ public abstract class APITests extends TestBase {
     /* -------------------------------------------------------------------------------------------------------------- */
     @Test
     @Tag("kafkasql")
+    @Disabled
     public void testRegistryKafkasqlNoAuthNoIAMCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.KAFKA_SQL, KafkaKind.NO_AUTH, false);
     }
 
     @Test
     @Tag("kafkasql")
+    @Disabled
     public void testRegistryKafkasqlNoAuthKeycloakCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.KAFKA_SQL, KafkaKind.NO_AUTH, true);
     }
 
     @Test
     @Tag("kafkasql")
+    @Disabled
     public void testRegistryKafkasqlTLSNoIAMCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.KAFKA_SQL, KafkaKind.TLS, false);
     }
 
     @Test
     @Tag("kafkasql")
+    @Disabled
     public void testRegistryKafkasqlTLSKeycloakCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.KAFKA_SQL, KafkaKind.TLS, true);
     }
 
     @Test
     @Tag("kafkasql")
+    @Disabled
     public void testRegistryKafkasqlSCRAMNoIAMCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.KAFKA_SQL, KafkaKind.SCRAM, false);
     }
 
     @Test
     @Tag("kafkasql")
+    @Disabled
     public void testRegistryKafkasqlSCRAMKeycloakCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.KAFKA_SQL, KafkaKind.SCRAM, true);
     }
