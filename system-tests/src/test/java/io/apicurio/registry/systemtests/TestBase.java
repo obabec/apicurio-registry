@@ -73,7 +73,6 @@ public abstract class TestBase {
         LoggerUtils.logDelimiter("#");
         LOGGER.info("Cleaning shared resources!");
         LoggerUtils.logDelimiter("#");
-        resourceManager.deleteKafka();
         KeycloakUtils.removeKeycloak(Environment.NAMESPACE);
         Thread.sleep(Duration.ofMinutes(2).toMillis());
         operatorManager.uninstallSharedOperators();

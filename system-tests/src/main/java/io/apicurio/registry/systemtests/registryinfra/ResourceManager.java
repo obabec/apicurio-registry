@@ -101,16 +101,11 @@ public class ResourceManager {
         type.createOrReplace(resource);
 
         synchronized (this) {
-            if (!name.equals(Constants.KAFKA)) {
-                STORED_RESOURCES.push(() -> deleteResource(resource));
-            }
+            STORED_RESOURCES.push(() -> deleteResource(resource));
         }
 
         LOGGER.info("Resource {} created.", resourceInfo);
 
-        if (!name.equals(Constants.KAFKA)) {
-            Thread.sleep(Duration.ofMinutes(1).toMillis());
-        }
         if (waitReady) {
             Assertions.assertTrue(
                     waitResourceCondition(resource, type::isReady),
@@ -258,17 +253,6 @@ public class ResourceManager {
         LOGGER.info("Resource {} is deleted.", resourceInfo);
     }
 
-    public void deleteKafka() {
-        Kafka kafka = KafkaResourceType
-                .getOperation()
-                .inNamespace(Environment.NAMESPACE)
-                .withName(Constants.KAFKA)
-                .get();
-
-        if (kafka != null) {
-            deleteResource(kafka);
-        }
-    }
     public void deleteSharedResources() {
         LOGGER.info("----------------------------------------------");
         LOGGER.info("Going to clear shared resources.");
