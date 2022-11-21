@@ -24,7 +24,6 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Tag("auth")
-@Disabled
 public abstract class AuthTests extends TestBase {
     /* TEST RUNNERS */
 
