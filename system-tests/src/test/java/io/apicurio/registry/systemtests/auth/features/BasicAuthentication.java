@@ -138,5 +138,9 @@ public class BasicAuthentication {
         Assertions.assertTrue(testClient.updateArtifact(groupId, id, updatedContent, HttpStatus.SC_UNAUTHORIZED));
         // Check that API returns 401 Unauthorized when deleting artifact
         Assertions.assertTrue(testClient.deleteArtifact(groupId, id, HttpStatus.SC_UNAUTHORIZED));
+
+        // REMOVE REGISTRY CONTENT
+        // Delete artifact for test
+        Assertions.assertTrue(controlClient.deleteArtifact(groupId, id));
     }
 }

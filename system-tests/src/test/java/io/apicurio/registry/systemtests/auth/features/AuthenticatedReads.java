@@ -127,5 +127,18 @@ public class AuthenticatedReads {
         Assertions.assertTrue(testClient.updateArtifact(groupId, id, updatedContent, HttpStatus.SC_FORBIDDEN));
         // Check that API returns 403 Forbidden when deleting artifact
         Assertions.assertTrue(testClient.deleteArtifact(groupId, id, HttpStatus.SC_FORBIDDEN));
+
+        // DISABLE ROLE-BASED AUTHORIZATION
+        // Set environment variable ROLE_BASED_AUTHZ_ENABLED of deployment to false
+        DeploymentUtils.createOrReplaceDeploymentEnvVar(deployment, new EnvVar() {{
+            setName("ROLE_BASED_AUTHZ_ENABLED");
+            setValue("false");
+        }});
+        // Wait for API availability
+        Assertions.assertTrue(controlClient.waitServiceAvailable());
+
+        // REMOVE REGISTRY CONTENT
+        // Delete artifact for test
+        Assertions.assertTrue(controlClient.deleteArtifact(groupId, id));
     }
 }
