@@ -15,6 +15,7 @@ import io.apicurio.registry.systemtests.auth.features.RoleBasedAuthorizationToke
 import io.apicurio.registry.systemtests.framework.Constants;
 import io.apicurio.registry.systemtests.registryinfra.resources.KafkaKind;
 import io.apicurio.registry.systemtests.registryinfra.resources.PersistenceKind;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -23,6 +24,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Tag("auth")
+@Disabled
 public abstract class AuthTests extends TestBase {
     /* TEST RUNNERS */
 
