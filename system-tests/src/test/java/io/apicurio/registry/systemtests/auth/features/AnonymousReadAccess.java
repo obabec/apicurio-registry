@@ -128,6 +128,10 @@ public class AnonymousReadAccess {
         Assertions.assertTrue(testClient.deleteArtifact(groupId, id, HttpStatus.SC_UNAUTHORIZED));
 
         // REMOVE REGISTRY CONTENT
+        if (useToken) {
+            // Get access token from Keycloak and update control API client with it
+            controlClient.setToken(KeycloakUtils.getAccessToken(apicurioRegistry, username, password));
+        }
         // Delete artifact for test
         Assertions.assertTrue(controlClient.deleteArtifact(groupId, id));
     }
