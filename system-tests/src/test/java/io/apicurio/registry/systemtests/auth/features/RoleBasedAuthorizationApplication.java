@@ -116,5 +116,13 @@ public class RoleBasedAuthorizationApplication extends RoleBasedAuthorization {
 
         // Run test actions
         testRoleBasedEnabled();
+
+        // DELETE CREATED ROLES
+        // Delete role for admin user
+        superAdminClient.deleteUser(Constants.SSO_NO_ROLE_USER);
+        // Delete role for developer user
+        superAdminClient.deleteUser(Constants.SSO_READONLY_USER);
+        // Delete role for readonly user
+        superAdminClient.deleteUser(Constants.SSO_DEVELOPER_USER);
     }
 }
