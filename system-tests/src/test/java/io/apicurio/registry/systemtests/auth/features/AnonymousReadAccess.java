@@ -127,11 +127,16 @@ public class AnonymousReadAccess {
         // Check that API returns 401 Unauthorized when deleting artifact
         Assertions.assertTrue(testClient.deleteArtifact(groupId, id, HttpStatus.SC_UNAUTHORIZED));
 
+        // DISABLE REGISTRY AUTHENTICATION
+        // Set environment variable AUTH_ENABLED of deployment to false
+        DeploymentUtils.createOrReplaceDeploymentEnvVar(deployment, new EnvVar() {{
+            setName("AUTH_ENABLED");
+            setValue("false");
+        }});
+        // Wait for API availability
+        Assertions.assertTrue(controlClient.waitServiceAvailable());
+
         // REMOVE REGISTRY CONTENT
-        if (useToken) {
-            // Get access token from Keycloak and update control API client with it
-            controlClient.setToken(KeycloakUtils.getAccessToken(apicurioRegistry, username, password));
-        }
         // Delete artifact for test
         Assertions.assertTrue(controlClient.deleteArtifact(groupId, id));
     }
