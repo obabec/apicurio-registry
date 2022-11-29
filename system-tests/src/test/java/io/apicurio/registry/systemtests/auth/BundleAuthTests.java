@@ -9,7 +9,6 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 
 @Tag("bundle")
 @Tag("bundle-auth")
-@Disabled
 public class BundleAuthTests extends AuthTests {
     @Override
     public void setupTestClass() {

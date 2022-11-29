@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Tag;
 @Tag("olm")
 @Tag("olm-clusterwide")
 @Tag("olm-clusterwide-auth")
-@Disabled
 public class OLMClusterWideAuthTests extends OLMAuthTests {
     @Override
     public void setupTestClass() {

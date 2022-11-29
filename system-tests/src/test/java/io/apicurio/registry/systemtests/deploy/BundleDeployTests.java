@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
 @Tag("bundle")
-@Disabled
 public class BundleDeployTests extends DeployTests {
     @Override
     public void setupTestClass() {

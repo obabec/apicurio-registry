@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@Disabled
 public abstract class DeployTests extends TestBase {
     /* TESTS - PostgreSQL */
 
