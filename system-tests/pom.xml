@@ -314,6 +314,23 @@
             </properties>
         </profile>
         <profile>
+            <id>sql</id>
+            <properties>
+                <groups>sql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>kafkasql</id>
+            <properties>
+                <groups>kafkasql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+
+        <!-- auth tests -->
+
+        <profile>
             <id>bundle-auth</id>
             <properties>
                 <groups>bundle-auth</groups>
@@ -334,10 +351,51 @@
                 <skip.tests>false</skip.tests>
             </properties>
         </profile>
+
+        <!-- api tests -->
+
         <profile>
-            <id>live-test</id>
+            <id>bundle-api</id>
             <properties>
-                <groups>live-test</groups>
+                <groups>bundle-api</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-clusterwide-api</id>
+            <properties>
+                <groups>olm-clusterwide-api</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-namespace-api</id>
+            <properties>
+                <groups>olm-namespace-api</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+
+        <!-- deploy tests -->
+
+        <profile>
+            <id>bundle-deploy</id>
+            <properties>
+                <groups>bundle-deploy</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-clusterwide-deploy</id>
+            <properties>
+                <groups>olm-clusterwide-deploy</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-namespace-deploy</id>
+            <properties>
+                <groups>olm-namespace-deploy</groups>
                 <skip.tests>false</skip.tests>
             </properties>
         </profile>
