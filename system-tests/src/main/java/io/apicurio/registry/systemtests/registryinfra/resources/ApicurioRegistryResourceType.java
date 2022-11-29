@@ -244,7 +244,7 @@ public class ApicurioRegistryResourceType implements ResourceType<ApicurioRegist
                                 .withApiClientId(Constants.SSO_CLIENT_API)
                                 .withUiClientId(Constants.SSO_CLIENT_UI)
                                 .withRealm(Constants.SSO_REALM)
-                                .withUrl(KeycloakUtils.getDefaultKeycloakURL())
+                                .withUrl("http://keycloak:8080/auth")
                                 .endKeycloak()
                                 .build()
                 );

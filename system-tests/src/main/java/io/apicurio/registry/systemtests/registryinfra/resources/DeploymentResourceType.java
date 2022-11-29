@@ -72,11 +72,10 @@ public class DeploymentResourceType implements ResourceType<Deployment> {
     private static List<EnvVar> getDefaultPostgresqlEnvVars() {
         List<EnvVar> envVars = new ArrayList<>();
 
-        envVars.add(new EnvVar("POSTGRES_ADMIN_PASSWORD", "adminpassword", null));
-        envVars.add(new EnvVar("POSTGRES_DB", "postgresdb", null));
-        envVars.add(new EnvVar("POSTGRES_USER", "postgresuser", null));
-        envVars.add(new EnvVar("POSTGRES_PASSWORD", "postgrespassword", null));
-        envVars.add(new EnvVar("PGDATA", "/var/lib/pgsql/data/pgdata", null));
+        envVars.add(new EnvVar("POSTGRESQL_ADMIN_PASSWORD", "adminpassword", null));
+        envVars.add(new EnvVar("POSTGRESQL_DATABASE", "postgresdb", null));
+        envVars.add(new EnvVar("POSTGRESQL_USER", "postgresuser", null));
+        envVars.add(new EnvVar("POSTGRESQL_PASSWORD", "postgrespassword", null));
 
         return envVars;
     }
@@ -84,7 +83,7 @@ public class DeploymentResourceType implements ResourceType<Deployment> {
     private static Container getDefaultPostgresqlContainer(String name) {
         return new ContainerBuilder()
                 .withEnv(getDefaultPostgresqlEnvVars())
-                .withImage("postgres:15")
+                .withImage("quay.io/centos7/postgresql-12-centos7:latest")
                 .withImagePullPolicy("Always")
                 .withName(name)
                 .addNewPort()
@@ -102,10 +101,6 @@ public class DeploymentResourceType implements ResourceType<Deployment> {
                         .withNewPort(5432)
                     .endTcpSocket()
                 .endLivenessProbe()
-                .withVolumeMounts(new VolumeMount() {{
-                    setMountPath("/var/lib/pgsql/data");
-                    setName(name);
-                }})
                 .build();
     }
 
@@ -127,12 +122,6 @@ public class DeploymentResourceType implements ResourceType<Deployment> {
                         .endMetadata()
                         .withNewSpec()
                             .withContainers(getDefaultPostgresqlContainer(name))
-                            .withVolumes(new Volume() {{
-                                setName(name);
-                                setPersistentVolumeClaim(new PersistentVolumeClaimVolumeSource() {{
-                                    setClaimName(name);
-                                }});
-                            }})
                             .withRestartPolicy("Always")
                         .endSpec()
                     .endTemplate()

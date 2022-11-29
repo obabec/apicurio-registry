@@ -1,16 +1,4 @@
 CLAIM,CLAIM_VALUE,ADMIN_SUFFIX,IS_ADMIN_ALLOWED
-default,default,"",false
 default,default,"-org-admin-true",true
 default,true,"-org-admin-true",true
 default,yes,"-org-admin-yes",true
-default,yes,"-org-admin-true",false
-org-admin,default,"-org-admin-true",true
-org-admin,true,"-org-admin-true",true
-org-admin,yes,"-org-admin-yes",true
-org-admin,yes,"-org-admin-true",false
-admin-role,default,"-admin-role-true",true
-admin-role,default,"-org-admin-true",false
-admin-role,true,"-admin-role-true",true
-admin-role,true,"-org-admin-true",false
-admin-role,admin,"-admin-role-admin",true
-admin-role,admin,"-org-admin-true",false

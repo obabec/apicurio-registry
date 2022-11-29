@@ -15,7 +15,7 @@ public class DatabaseUtils {
         Service service = ServiceResourceType.getDefaultPostgresql();
 
         try {
-            ResourceManager.getInstance().createResource(false, persistentVolumeClaim);
+            // ResourceManager.getInstance().createResource(false, persistentVolumeClaim);
             ResourceManager.getInstance().createResource(true, deployment);
             ResourceManager.getInstance().createResource(false, service);
         } catch (Exception e) {
@@ -32,7 +32,7 @@ public class DatabaseUtils {
         Service service = ServiceResourceType.getDefaultPostgresql(name, namespace);
 
         try {
-            ResourceManager.getInstance().createResource(false, persistentVolumeClaim);
+            // ResourceManager.getInstance().createResource(false, persistentVolumeClaim);
             ResourceManager.getInstance().createResource(true, deployment);
             ResourceManager.getInstance().createResource(false, service);
         } catch (Exception e) {
