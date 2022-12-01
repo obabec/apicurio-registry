@@ -15,6 +15,7 @@ import io.apicurio.registry.systemtests.auth.features.RoleBasedAuthorizationToke
 import io.apicurio.registry.systemtests.framework.Constants;
 import io.apicurio.registry.systemtests.registryinfra.resources.KafkaKind;
 import io.apicurio.registry.systemtests.registryinfra.resources.PersistenceKind;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -411,6 +412,7 @@ public abstract class AuthTests extends TestBase {
     @ParameterizedTest
     @Tag("kafkasql")
     @CsvFileSource(resources = "/adminOverrideClaimData.csv", numLinesToSkip = 1)
+    @Disabled
     public void testRegistryKafkasqlNoAuthKeycloakRoleBasedAuthorizationAdminOverrideClaim(
             String claim,
             String claimValue,
@@ -430,6 +432,7 @@ public abstract class AuthTests extends TestBase {
     @ParameterizedTest
     @Tag("kafkasql")
     @CsvFileSource(resources = "/adminOverrideClaimData.csv", numLinesToSkip = 1)
+    @Disabled
     public void testRegistryKafkasqlTLSKeycloakRoleBasedAuthorizationAdminOverrideClaim(
             String claim,
             String claimValue,
@@ -449,6 +452,7 @@ public abstract class AuthTests extends TestBase {
     @ParameterizedTest
     @Tag("kafkasql")
     @CsvFileSource(resources = "/adminOverrideClaimData.csv", numLinesToSkip = 1)
+    @Disabled
     public void testRegistryKafkasqlSCRAMKeycloakRoleBasedAuthorizationAdminOverrideClaim(
             String claim,
             String claimValue,
