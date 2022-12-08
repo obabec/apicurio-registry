@@ -62,7 +62,7 @@ public class KeycloakOLMOperatorType extends OLMOperator implements OperatorType
 
         ResourceUtils.waitPackageManifestExists(catalogName, ssoPackage);
 
-        String channelName = OperatorUtils.getDefaultChannel(catalogName, ssoPackage);
+        String channelName = "alpha"; // OperatorUtils.getDefaultChannel(catalogName, ssoPackage);
         setClusterServiceVersion(OperatorUtils.getCurrentCSV(catalogName, ssoPackage, channelName));
 
         LOGGER.info("OLM operator CSV: {}", getClusterServiceVersion());
