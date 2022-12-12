@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KafkaResourceType implements ResourceType<Kafka> {
-    private static final String KAFKA_VERSION = "3.1.0";
     private static final int KAFKA_REPLICAS = 1;
     private static final int ZOOKEEPER_REPLICAS = 1;
 
@@ -168,7 +167,6 @@ public class KafkaResourceType implements ResourceType<Kafka> {
                 .endMetadata()
                 .withNewSpec()
                     .withNewKafka()
-                        .withVersion(KAFKA_VERSION)
                         .withReplicas(KAFKA_REPLICAS)
                         .withListeners(getPlainListener())
                         .withConfig(getDefaultConfig())
@@ -191,7 +189,6 @@ public class KafkaResourceType implements ResourceType<Kafka> {
                 .endMetadata()
                 .withNewSpec()
                     .withNewKafka()
-                        .withVersion(KAFKA_VERSION)
                         .withReplicas(KAFKA_REPLICAS)
                         .withListeners(
                                 getPlainListener(),
@@ -217,7 +214,6 @@ public class KafkaResourceType implements ResourceType<Kafka> {
                 .endMetadata()
                 .withNewSpec()
                     .withNewKafka()
-                        .withVersion(KAFKA_VERSION)
                         .withReplicas(KAFKA_REPLICAS)
                         .withListeners(
                                 getPlainListener(),
