@@ -18,10 +18,8 @@ public class BundleDeployTests extends DeployTests {
     public void testBeforeEach(ExtensionContext testContext) throws InterruptedException {
         LOGGER.info("BeforeEach: " + testContext.getTestMethod().get().getName());
 
-        ApicurioRegistryBundleOperatorType registryBundleOperator = new ApicurioRegistryBundleOperatorType(
-                "/home/jenkins/workspace/operator/apicurio-operator/install-examples/apicurio-registry-install-examples/install/install.yaml"
-        );
-        
+        ApicurioRegistryBundleOperatorType registryBundleOperator = new ApicurioRegistryBundleOperatorType();
+
         operatorManager.installOperator(registryBundleOperator);
     }
 }
