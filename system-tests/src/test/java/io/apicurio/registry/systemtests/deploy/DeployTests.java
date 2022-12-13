@@ -12,11 +12,13 @@ public abstract class DeployTests extends TestBase {
     /* TESTS - PostgreSQL */
 
     @Test
+    @Tag("sql")
     public void testRegistrySqlNoIAM() throws InterruptedException {
         deployTestRegistry(PersistenceKind.SQL, null, false);
     }
 
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloak() throws InterruptedException {
         deployTestRegistry(PersistenceKind.SQL, null, true);
     }
