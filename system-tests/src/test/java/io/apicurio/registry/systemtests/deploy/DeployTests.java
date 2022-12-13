@@ -24,31 +24,37 @@ public abstract class DeployTests extends TestBase {
     /* TESTS - KafkaSQL */
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlNoAuthNoIAM() throws InterruptedException {
         deployTestRegistry(PersistenceKind.KAFKA_SQL, KafkaKind.NO_AUTH, false);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlNoAuthKeycloak() throws InterruptedException {
         deployTestRegistry(PersistenceKind.KAFKA_SQL, KafkaKind.NO_AUTH, true);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlTLSNoIAM() throws InterruptedException {
         deployTestRegistry(PersistenceKind.KAFKA_SQL, KafkaKind.TLS, false);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlTLSKeycloak() throws InterruptedException {
         deployTestRegistry(PersistenceKind.KAFKA_SQL, KafkaKind.TLS, true);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlSCRAMNoIAM() throws InterruptedException {
         deployTestRegistry(PersistenceKind.KAFKA_SQL, KafkaKind.SCRAM, false);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlSCRAMKeycloak() throws InterruptedException {
         deployTestRegistry(PersistenceKind.KAFKA_SQL, KafkaKind.SCRAM, true);
     }
