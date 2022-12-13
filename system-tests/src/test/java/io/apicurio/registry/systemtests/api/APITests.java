@@ -74,62 +74,74 @@ public abstract class APITests extends TestBase {
     /* TESTS - KafkaSQL */
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlNoAuthNoIAMCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.KAFKA_SQL, KafkaKind.NO_AUTH, false);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlNoAuthKeycloakCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.KAFKA_SQL, KafkaKind.NO_AUTH, true);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlTLSNoIAMCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.KAFKA_SQL, KafkaKind.TLS, false);
     }
 
     @Test
     @Tag("live-test")
+    @Tag("kafkasql")
     public void testRegistryKafkasqlTLSKeycloakCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.KAFKA_SQL, KafkaKind.TLS, true);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlSCRAMNoIAMCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.KAFKA_SQL, KafkaKind.SCRAM, false);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlSCRAMKeycloakCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.KAFKA_SQL, KafkaKind.SCRAM, true);
     }
     /* -------------------------------------------------------------------------------------------------------------- */
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlNoAuthNoIAMCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.KAFKA_SQL, KafkaKind.NO_AUTH, false);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlNoAuthKeycloakCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.KAFKA_SQL, KafkaKind.NO_AUTH, true);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlTLSNoIAMCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.KAFKA_SQL, KafkaKind.TLS, false);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlTLSKeycloakCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.KAFKA_SQL, KafkaKind.TLS, true);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlSCRAMNoIAMCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.KAFKA_SQL, KafkaKind.SCRAM, false);
     }
 
     @Test
+    @Tag("kafkasql")
     public void testRegistryKafkasqlSCRAMKeycloakCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.KAFKA_SQL, KafkaKind.SCRAM, true);
     }

@@ -399,5 +399,77 @@
                 <skip.tests>false</skip.tests>
             </properties>
         </profile>
+
+        <!-- KafkaSQL + deploy -->
+
+        <profile>
+            <id>bundle-deploy-kafkasql</id>
+            <properties>
+                <groups>bundle-deploy &amp; kafkasql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-clusterwide-deploy-kafkasql</id>
+            <properties>
+                <groups>olm-clusterwide-deploy &amp; kafkasql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-namespace-deploy-kafkasql</id>
+            <properties>
+                <groups>olm-namespace-deploy &amp; kafkasql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+
+        <!-- KafkaSQL + auth -->
+
+        <profile>
+            <id>bundle-auth-kafkasql</id>
+            <properties>
+                <groups>bundle-auth &amp; kafkasql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-clusterwide-auth-kafkasql</id>
+            <properties>
+                <groups>olm-clusterwide-auth &amp; kafkasql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-namespace-auth-kafkasql</id>
+            <properties>
+                <groups>olm-namespace-auth &amp; kafkasql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+
+        <!-- KafkaSQL + API -->
+
+        <profile>
+            <id>bundle-api-kafkasql</id>
+            <properties>
+                <groups>bundle-api &amp; kafkasql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-clusterwide-api-kafkasql</id>
+            <properties>
+                <groups>olm-clusterwide-api &amp; kafkasql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-namespace-api-kafkasql</id>
+            <properties>
+                <groups>olm-namespace-api &amp; kafkasql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
     </profiles>
 </project>
