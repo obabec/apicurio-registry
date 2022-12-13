@@ -51,22 +51,26 @@ public abstract class APITests extends TestBase {
     /* TESTS - PostgreSQL */
 
     @Test
+    @Tag("sql")
     public void testRegistrySqlNoIAMCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.SQL, null, false);
     }
 
     @Test
     @Tag("live-test")
+    @Tag("sql")
     public void testRegistrySqlKeycloakCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.SQL, null, true);
     }
     /* -------------------------------------------------------------------------------------------------------------- */
     @Test
+    @Tag("sql")
     public void testRegistrySqlNoIAMCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.SQL, null, false);
     }
 
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloakCreateArtifact() throws InterruptedException {
         runCreateArtifactTest(PersistenceKind.SQL, null, true);
     }
