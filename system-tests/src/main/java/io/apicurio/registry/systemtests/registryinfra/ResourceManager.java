@@ -101,16 +101,13 @@ public class ResourceManager {
         type.createOrReplace(resource);
 
         synchronized (this) {
-            if (!name.equals(Constants.KAFKA)) {
-                STORED_RESOURCES.push(() -> deleteResource(resource));
-            }
+            STORED_RESOURCES.push(() -> deleteResource(resource));
         }
 
         LOGGER.info("Resource {} created.", resourceInfo);
 
-        if (!name.equals(Constants.KAFKA)) {
-            Thread.sleep(Duration.ofMinutes(1).toMillis());
-        }
+        Thread.sleep(Duration.ofMinutes(1).toMillis());
+
         if (waitReady) {
             Assertions.assertTrue(
                     waitResourceCondition(resource, type::isReady),
