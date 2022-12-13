@@ -144,52 +144,62 @@ public abstract class AuthTests extends TestBase {
     /* TESTS - PostgreSQL */
 
     @Test
+    @Tag("sql")
     public void testRegistrySqlNoIAMAnonymousReadAccess() throws InterruptedException {
         runAnonymousReadAccessTest(PersistenceKind.SQL, null, false);
     }
 
     @Test
     @Tag("live-test")
+    @Tag("sql")
     public void testRegistrySqlKeycloakAnonymousReadAccess() throws InterruptedException {
         runAnonymousReadAccessTest(PersistenceKind.SQL, null, true);
     }
     /* -------------------------------------------------------------------------------------------------------------- */
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloakBasicAuthentication() throws InterruptedException {
         runBasicAuthenticationTest(PersistenceKind.SQL, null);
     }
     /* -------------------------------------------------------------------------------------------------------------- */
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloakAuthenticatedReads() throws InterruptedException {
         runAuthenticatedReadsTest(PersistenceKind.SQL, null);
     }
     /* -------------------------------------------------------------------------------------------------------------- */
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloakArtifactOwnerOnlyAuthorization() throws InterruptedException {
         runArtifactOwnerOnlyAuthorizationTest(PersistenceKind.SQL, null);
     }
     /* -------------------------------------------------------------------------------------------------------------- */
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloakArtifactGroupOwnerOnlyAuthorization() throws InterruptedException {
         runArtifactGroupOwnerOnlyAuthorizationTest(PersistenceKind.SQL, null);
     }
     /* -------------------------------------------------------------------------------------------------------------- */
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloakRoleBasedAuthorizationToken() throws InterruptedException {
         runRoleBasedAuthorizationTokenTest(PersistenceKind.SQL, null);
     }
     /* -------------------------------------------------------------------------------------------------------------- */
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloakRoleBasedAuthorizationApplication() throws InterruptedException {
         runRoleBasedAuthorizationApplicationTest(PersistenceKind.SQL, null);
     }
     /* -------------------------------------------------------------------------------------------------------------- */
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloakRoleBasedAuthorizationRoleNames() throws InterruptedException {
         runRoleBasedAuthorizationRoleNamesTest(PersistenceKind.SQL, null);
     }
     /* -------------------------------------------------------------------------------------------------------------- */
     @Test
+    @Tag("sql")
     public void testRegistrySqlKeycloakRoleBasedAuthorizationAdminOverrideRole(
     ) throws InterruptedException {
         runRoleBasedAuthorizationAdminOverrideRoleTest(PersistenceKind.SQL, null);
@@ -197,6 +207,7 @@ public abstract class AuthTests extends TestBase {
     /* -------------------------------------------------------------------------------------------------------------- */
     @ParameterizedTest
     @CsvFileSource(resources = "/adminOverrideClaimData.csv", numLinesToSkip = 1)
+    @Tag("sql")
     public void testRegistrySqlKeycloakRoleBasedAuthorizationAdminOverrideClaim(
             String claim,
             String claimValue,

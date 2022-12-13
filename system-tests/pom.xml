@@ -471,5 +471,77 @@
                 <skip.tests>false</skip.tests>
             </properties>
         </profile>
+
+        <!-- PostgreSQL + deploy -->
+
+        <profile>
+            <id>bundle-deploy-sql</id>
+            <properties>
+                <groups>bundle-deploy &amp; sql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-clusterwide-deploy-sql</id>
+            <properties>
+                <groups>olm-clusterwide-deploy &amp; sql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-namespace-deploy-sql</id>
+            <properties>
+                <groups>olm-namespace-deploy &amp; sql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+
+        <!-- PostgreSQL + auth -->
+
+        <profile>
+            <id>bundle-auth-sql</id>
+            <properties>
+                <groups>bundle-auth &amp; sql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-clusterwide-auth-sql</id>
+            <properties>
+                <groups>olm-clusterwide-auth &amp; sql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-namespace-auth-sql</id>
+            <properties>
+                <groups>olm-namespace-auth &amp; sql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+
+        <!-- PostgreSQL + API -->
+
+        <profile>
+            <id>bundle-api-sql</id>
+            <properties>
+                <groups>bundle-api &amp; sql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-clusterwide-api-sql</id>
+            <properties>
+                <groups>olm-clusterwide-api &amp; sql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-namespace-api-sql</id>
+            <properties>
+                <groups>olm-namespace-api &amp; sql</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
     </profiles>
 </project>
