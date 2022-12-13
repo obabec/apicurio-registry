@@ -15,8 +15,8 @@ import io.strimzi.api.kafka.model.listener.KafkaListenerAuthenticationTls;
 import io.strimzi.api.kafka.model.listener.arraylistener.GenericKafkaListener;
 import io.strimzi.api.kafka.model.listener.arraylistener.GenericKafkaListenerBuilder;
 import io.strimzi.api.kafka.model.listener.arraylistener.KafkaListenerType;
-import io.strimzi.api.kafka.model.storage.PersistentClaimStorage;
-import io.strimzi.api.kafka.model.storage.PersistentClaimStorageBuilder;
+import io.strimzi.api.kafka.model.storage.EphemeralStorage;
+import io.strimzi.api.kafka.model.storage.EphemeralStorageBuilder;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -143,11 +143,8 @@ public class KafkaResourceType implements ResourceType<Kafka> {
         }};
     }
 
-    public static PersistentClaimStorage getDefaultStorage() {
-        return new PersistentClaimStorageBuilder()
-                .withSize("30Gi")
-                .withDeleteClaim(true)
-                .build();
+    public static EphemeralStorage getDefaultStorage() {
+        return new EphemeralStorageBuilder().build();
     }
 
     public static EntityOperatorSpec getDefaultEntityOperator() {
