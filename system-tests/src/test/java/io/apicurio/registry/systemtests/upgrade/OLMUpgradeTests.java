@@ -28,10 +28,7 @@ public class OLMUpgradeTests extends TestBase {
 
     public void runUpgradeTest(boolean clusterWide) throws InterruptedException {
         // Install operator from default catalog (do not use catalog source image, it will be used for upgrade)
-        ApicurioRegistryOLMOperatorType registryOLMOperator = new ApicurioRegistryOLMOperatorType(
-                null,
-                clusterWide
-        );
+        ApicurioRegistryOLMOperatorType registryOLMOperator = new ApicurioRegistryOLMOperatorType(clusterWide);
         operatorManager.installOperator(registryOLMOperator);
 
         // Save current (pre-upgrade) ClusterServiceVersion of operator
