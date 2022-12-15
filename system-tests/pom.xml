@@ -17,8 +17,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <version.junit.jupiter>5.8.2</version.junit.jupiter>
         <version.junit.platform>1.7.0</version.junit.platform>
-        <version.fabric8>5.12.2</version.fabric8>
-        <version.fabric8-java-gen>6.3.0</version.fabric8-java-gen>
+        <version.fabric8>6.3.0</version.fabric8>
         <sundrio.version>0.93.1</sundrio.version>
         <lombok.version>1.18.24</lombok.version>
         <operator.version>1.0.0-v2.0.0.final</operator.version>
@@ -248,7 +247,7 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>java-generator-maven-plugin</artifactId>
-                <version>${version.fabric8-java-gen}</version>
+                <version>${version.fabric8}</version>
                 <executions>
                   <execution>
                     <phase>generate-sources</phase>
