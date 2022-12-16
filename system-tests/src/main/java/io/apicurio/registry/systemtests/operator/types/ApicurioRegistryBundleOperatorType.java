@@ -5,6 +5,7 @@ import io.apicurio.registry.systemtests.framework.LoggerUtils;
 import io.apicurio.registry.systemtests.framework.OperatorUtils;
 import io.apicurio.registry.systemtests.framework.ResourceUtils;
 import io.apicurio.registry.systemtests.platform.Kubernetes;
+import io.fabric8.kubernetes.api.model.HasMetadata;
 import io.fabric8.kubernetes.api.model.apps.Deployment;
 import io.fabric8.kubernetes.api.model.apps.DeploymentSpec;
 import io.fabric8.kubernetes.api.model.apps.DeploymentStatus;
@@ -37,6 +38,15 @@ public class ApicurioRegistryBundleOperatorType extends BundleOperator implement
             LOGGER.info("Using file " + getSource() + " to load operator resources...");
 
             setResources(Kubernetes.loadFromFile(getSource()));
+
+            LOGGER.info("### --- ###");
+            LOGGER.info("Sources:");
+
+            for (HasMetadata  s : getResources()) {
+                LOGGER.info(s.toString());
+            }
+
+            LOGGER.info("### --- ###");
 
             LOGGER.info("Operator resources loaded from file " + getSource() + ".");
         } else {
