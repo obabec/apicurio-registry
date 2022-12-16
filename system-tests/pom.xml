@@ -543,5 +543,29 @@
                 <skip.tests>false</skip.tests>
             </properties>
         </profile>
+
+        <!-- Extra smoke tests -->
+
+        <profile>
+            <id>live-test</id>
+            <properties>
+                <groups>live-test</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>bundle-live-test</id>
+            <properties>
+                <groups>bundle &amp; live-test</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>olm-live-test</id>
+            <properties>
+                <groups>olm &amp; live-test</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
     </profiles>
 </project>
