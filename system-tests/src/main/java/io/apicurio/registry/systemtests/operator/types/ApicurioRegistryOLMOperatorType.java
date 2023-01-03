@@ -155,9 +155,8 @@ public class ApicurioRegistryOLMOperatorType extends OLMOperator implements Oper
 
         ResourceUtils.waitPackageManifestExists(catalogName, registryPackage);
 
-        String channelName = OperatorUtils.getDefaultChannel(catalogName, registryPackage);
-        String csv = OperatorUtils.getCurrentCSV(catalogName, registryPackage, channelName);
-        setClusterServiceVersion(( csv == null ? "service-registry-operator.v2.1.2" : csv));
+        String channelName = "2.x";
+        setClusterServiceVersion("service-registry-operator.v2.1.2");
 
         LOGGER.info("OLM operator CSV: {}", getClusterServiceVersion());
 
