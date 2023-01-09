@@ -15,6 +15,8 @@ public final class Environment {
     public static final String KAFKA_DEPLOYMENT_ENV_VAR = "KAFKA_DEPLOYMENT";
     public static final String KAFKA_PACKAGE_ENV_VAR = "KAFKA_PACKAGE";
     public static final String REGISTRY_BUNDLE_ENV_VAR = "REGISTRY_BUNDLE";
+    public static final String REGISTRY_CHANNEL_ENV_VAR = "REGISTRY_CHANNEL";
+    public static final String REGISTRY_CSV_ENV_VAR = "REGISTRY_CSV";
     public static final String REGISTRY_PACKAGE_ENV_VAR = "REGISTRY_PACKAGE";
     public static final String SSO_PACKAGE_ENV_VAR = "SSO_PACKAGE";
     public static final String TESTSUITE_PATH_ENV_VAR = "TESTSUITE_PATH";
@@ -27,6 +29,8 @@ public final class Environment {
     public static final String SSO_CATALOG_DEFAULT = "community-operators";
     public static final String KAFKA_DEPLOYMENT_DEFAULT = "strimzi-cluster-operator"; // Default from catalog
     public static final String KAFKA_PACKAGE_DEFAULT = "strimzi-kafka-operator"; // Default from catalog
+    public static final String REGISTRY_CHANNEL_DEFAULT = "2.x";
+    public static final String REGISTRY_CSV_DEFAULT = "service-registry-operator.v2.1.2";
     public static final String REGISTRY_BUNDLE_DEFAULT =
             "https://raw.githubusercontent.com/Apicurio/apicurio-registry-operator/main/install/" +
                     "apicurio-registry-operator-1.0.0-v2.0.0.final.yaml";
@@ -47,6 +51,8 @@ public final class Environment {
     public static final String KAFKA_DEPLOYMENT = getOrDefault(KAFKA_DEPLOYMENT_ENV_VAR, KAFKA_DEPLOYMENT_DEFAULT);
     public static final String KAFKA_PACKAGE = getOrDefault(KAFKA_PACKAGE_ENV_VAR, KAFKA_PACKAGE_DEFAULT);
     public static final String REGISTRY_BUNDLE = getOrDefault(REGISTRY_BUNDLE_ENV_VAR, REGISTRY_BUNDLE_DEFAULT);
+    public static final String REGISTRY_CHANNEL = getOrDefault(REGISTRY_CHANNEL_ENV_VAR, REGISTRY_CHANNEL_DEFAULT);
+    public static final String REGISTRY_CSV = getOrDefault(REGISTRY_CSV_ENV_VAR, REGISTRY_CSV_DEFAULT);
     public static final String REGISTRY_PACKAGE = getOrDefault(REGISTRY_PACKAGE_ENV_VAR, REGISTRY_PACKAGE_DEFAULT);
     public static final String SSO_PACKAGE = getOrDefault(SSO_PACKAGE_ENV_VAR, SSO_PACKAGE_DEFAULT);
     public static final String TESTSUITE_PATH = getOrDefault(TESTSUITE_PATH_ENV_VAR, TESTSUITE_PATH_DEFAULT);
