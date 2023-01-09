@@ -17,13 +17,13 @@
         <maven.compiler.target>11</maven.compiler.target>
         <version.junit.jupiter>5.8.2</version.junit.jupiter>
         <version.junit.platform>1.7.0</version.junit.platform>
-        <version.fabric8>5.12.2</version.fabric8>
+        <version.fabric8>6.3.1</version.fabric8>
         <version.fabric8-java-gen>6.3.1</version.fabric8-java-gen>
         <sundrio.version>0.93.2</sundrio.version>
         <lombok.version>1.18.24</lombok.version>
         <operator.version>1.0.0-v2.0.0.final</operator.version>
         <version.hamcrest>2.2</version.hamcrest>
-        <version.slf4.simple>2.0.6</version.slf4.simple>
+        <version.slf4>2.0.6</version.slf4>
         <version.strimzi.api>0.32.0</version.strimzi.api>
         <version.eclipse.jgit>6.4.0.202211300538-r</version.eclipse.jgit>
         <version.org.json>20220924</version.org.json>
@@ -72,12 +72,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${version.slf4.api}</version>
+            <version>${version.slf4}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>${version.slf4.simple}</version>
+            <version>${version.slf4}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -564,6 +564,16 @@
             <id>olm-live-test</id>
             <properties>
                 <groups>olm &amp; live-test</groups>
+                <skip.tests>false</skip.tests>
+            </properties>
+        </profile>
+
+        <!-- Interop tests -->
+
+        <profile>
+            <id>interop</id>
+            <properties>
+                <groups>interop</groups>
                 <skip.tests>false</skip.tests>
             </properties>
         </profile>
