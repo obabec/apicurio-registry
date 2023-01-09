@@ -57,7 +57,7 @@ public abstract class APITests extends TestBase {
     }
 
     @Test
-    @Tag("live-test")
+    @Tag("interop")
     @Tag("sql")
     public void testRegistrySqlKeycloakCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.SQL, null, true);
@@ -96,7 +96,7 @@ public abstract class APITests extends TestBase {
     }
 
     @Test
-    @Tag("live-test")
+    @Tag("interop")
     @Tag("kafkasql")
     public void testRegistryKafkasqlTLSKeycloakCreateReadUpdateDelete() throws InterruptedException {
         runCreateReadUpdateDeleteTest(PersistenceKind.KAFKA_SQL, KafkaKind.TLS, true);
