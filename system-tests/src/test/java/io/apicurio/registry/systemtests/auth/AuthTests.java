@@ -258,7 +258,6 @@ public abstract class AuthTests extends TestBase {
     }
 
     @Test
-    @Tag("interop")
     @Tag("kafkasql")
     public void testRegistryKafkasqlSCRAMKeycloakAnonymousReadAccess() throws InterruptedException {
         runAnonymousReadAccessTest(PersistenceKind.KAFKA_SQL, KafkaKind.SCRAM, true);
@@ -271,13 +270,13 @@ public abstract class AuthTests extends TestBase {
     }
 
     @Test
-    @Tag("interop")
     @Tag("kafkasql")
     public void testRegistryKafkasqlTLSKeycloakBasicAuthentication() throws InterruptedException {
         runBasicAuthenticationTest(PersistenceKind.KAFKA_SQL, KafkaKind.TLS);
     }
 
     @Test
+    @Tag("interop")
     @Tag("kafkasql")
     public void testRegistryKafkasqlSCRAMKeycloakBasicAuthentication() throws InterruptedException {
         runBasicAuthenticationTest(PersistenceKind.KAFKA_SQL, KafkaKind.SCRAM);
